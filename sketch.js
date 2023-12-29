@@ -1,4 +1,4 @@
-isDirected = false;
+isDirected = true;
 isDirectedText = "Directed"
 const States = {
     Text: "text",

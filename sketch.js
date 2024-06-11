@@ -1,4 +1,11 @@
-isDirected = true;
+isDirected = false;
+let textInput;
+let create;
+let deleteAll;
+let saveGraph;
+let uploadGraph;
+let graphText;
+let graphTextFieldToggle = false;
 isDirectedText = "Directed"
 const States = {
     Text: "text",
@@ -6,6 +13,17 @@ const States = {
 }
 
 function setup() {
+    input = createInput('');
+    input.position(10,10);
+    input.attribute('placeholder', 'Node Value here');
+    create = createButton("Create");
+    create.position(10,40);
+    create.mousePressed(createPressed);
+    deleteAll = createButton("Delete All");
+    deleteAll.position(10,70);
+    deleteAll.mousePressed(deleteAllPressed);
+
+    textAlign(CENTER);
     createCanvas(windowWidth, windowHeight);
     strokeWeight(5)
 }
@@ -17,9 +35,17 @@ function windowResized() {
 function draw() {
     background(220);
     fill(0)
-    text(isDirectedText, 30,30)
     drawNodes();
     
+}
+
+function createPressed(){
+    createNode(windowWidth/2, windowHeight/2);
+}
+
+function deleteAllPressed(){
+    nodes = [];
+    selectedNode = null;
 }
 
 function drawNodes() {
@@ -54,15 +80,15 @@ function mousePressed() {
 function keyPressed() {
     // Create
     if (key === "q") {
-        createNode()
+        createNode(mouseX, mouseY);
     }
     // Delete
     if (key === "d") {
-        deleteNode()
+        deleteNode();
     }
     // Connect / Disconnect
     if (key === "w") {
-        toggleConnectNode()
+        toggleConnectNode();
     }
 }
 

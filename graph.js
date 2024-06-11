@@ -2,8 +2,9 @@
 let nodes = [];
 let selectedNode = null;
 
-function createNode() {
-	newNode = new Node(mouseX, mouseY, 30);
+function createNode(x,y) {
+    msg = input.value();
+	newNode = new Node(x, y, 30, msg);
 	if (selectedNode != null) {
 		selectedNode.nodes.push(newNode);
         selectedNode.connectedNodes.push(newNode);
@@ -13,6 +14,7 @@ function createNode() {
         }
 	}
 	nodes.push(newNode);
+    console.log("Created node");
 }
 
 function deleteNode() {
@@ -79,14 +81,15 @@ function toggleConnectNode() {
 
 // Node class
 class Node {
-	constructor(x, y, radius) {
+	constructor(x, y, radius, value) {
 		this.x = x;
 		this.y = y;
 		this.offsetX = 0;
 		this.offsetY = 0;
 		this.radius = radius;
 		this.nodes = [];
-        this.connectedNodes = []
+        this.connectedNodes = [];
+        this.value = value;
 	}
 
 	move() {
@@ -125,6 +128,9 @@ class Node {
 			fill(255, 0, 0);
 		}
 		ellipse(this.x, this.y, this.radius * 2);
+        fill(0,0,0);
+        textAlign(CENTER);
+        text(this.value, this.x, this.y);
 		
 	}
 
